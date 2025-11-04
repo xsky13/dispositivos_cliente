@@ -23,6 +23,9 @@ import api from "./api";
 import { AuthContext } from "./context/AuthContext";
 import Login from "./components/Auth/Login";
 import Header from "./components/Header";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+import { toast, Toaster } from "sonner";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -36,6 +39,14 @@ export const links: Route.LinksFunction = () => [
 		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
 	},
 ];
+
+export type Alert = {
+	deviceId: number,
+	message: string,
+	timestamp: string,
+	nivel: string,
+	usuarios: number[]
+}
 
 const queryClient = new QueryClient()
 
@@ -64,7 +75,30 @@ export function Layout({ children }: { children: React.ReactNode }) {
 function AppContent({ children }: { children: React.ReactNode }) {
 	const navigation = useNavigation();
 	const isNavigating = Boolean(navigation.location);
+	const [alerts, setAlerts] = useState<Alert[]>([]);
 
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+		const socket = io('http://localhost:8000', {
+			auth: { token }
+		});
+
+		socket.on('connect', () => {
+			console.log('Connected to WebSocket');
+		});
+
+		socket.on('connect_error', (error) => {
+			console.error('Connection error:', error.message);
+		});
+
+		socket.on('alert', (alert: Alert) => {
+			toast.error(`Alerta nivel ${alert.nivel} en dispositivo ${alert.deviceId}`, {
+				description: alert.message
+			})
+		});
+
+		return () => { socket.disconnect() };
+	}, []);
 
 	const location = useLocation();
 	const userQuery = useQuery<User>({
@@ -93,6 +127,7 @@ function AppContent({ children }: { children: React.ReactNode }) {
 	return (
 		<AuthContext value={userQuery.data}>
 			<Header />
+			<Toaster richColors />
 			{children}
 		</AuthContext>
 	);

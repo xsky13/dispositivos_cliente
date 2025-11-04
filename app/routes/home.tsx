@@ -19,8 +19,6 @@ export default function Home() {
 		queryKey: ['get_dispositivos'],
 		queryFn: async () => {
 			const response = await api.get("/dispositivos");
-			console.log(response);
-
 			return response.data;
 		}
 	});
