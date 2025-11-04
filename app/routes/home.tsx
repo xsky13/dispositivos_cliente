@@ -7,6 +7,7 @@ import api from "~/api";
 import { Link } from "react-router";
 import Search from "~/components/Search";
 import type { Dispositivo } from "~/types/dispositivo";
+import { displayState } from "~/utils";
 
 export function meta({ }: Route.MetaArgs) {
 	return [
@@ -26,9 +27,6 @@ export default function Home() {
 		}
 	});
 
-	const displayState = (state: string): JSX.Element => {
-		return state == "alert" ? <span className="text-red-600 font-bold">{state.toUpperCase()}</span> : <span>{state}</span>
-	}
 
 	if (dispositivosQuery.isLoading) {
 		return <div className="text-center py-20">
