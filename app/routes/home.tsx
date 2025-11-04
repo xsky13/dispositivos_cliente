@@ -46,7 +46,7 @@ export default function Home() {
 		</div>
 	}
 	return (
-		<div className="md:w-8/12 lg:w-10/12 w-11/12 block m-auto py-10">
+		<div className="container-width block m-auto py-10">
 			<div className="flex flex-col gap-y-3">
 				<div role="tablist" className="tabs tabs-border">
 					<a role="tab" className="tab tab-active">Dispositivos</a>
