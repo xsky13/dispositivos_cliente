@@ -143,7 +143,7 @@ export default function Dispositivo() {
                     <div className="flex gap-10 items-start flex-wrap md:flex-nowrap">
                         <div className="w-full md:w-2/6">
                             <p className=" text-gray-600 font-bold text-sm mb-2">Informacion general</p>
-                            <div className="border border-dashed border-base-300 dark:border-base-100 rounded-md py-4 px-5">
+                            <div className="border border-dashed border-base-300 dark:border-base-100 rounded-sm py-4 px-5">
                                 <h1>{dispositivoQuery.data?.name}</h1>
                                 <div className="text-gray-600 text-sm">
                                     <div className="my-1"></div>
@@ -191,7 +191,7 @@ export default function Dispositivo() {
                     <div className="w-full flex gap-4">
                         <div className="w-6/12">
                             <p className=" text-gray-600 font-bold text-sm mb-2">Informacion general</p>
-                            <div className="border border-dashed border-base-300 dark:border-base-100 rounded-md py-4 px-5">
+                            <div className="border border-dashed border-base-300 dark:border-base-100 rounded-sm py-4 px-5">
                                 <h1>{dispositivoQuery.data?.name}</h1>
                                 <div className="text-gray-600 text-sm">
                                     <div className="my-1"></div>

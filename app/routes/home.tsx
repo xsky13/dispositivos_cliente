@@ -54,11 +54,11 @@ export default function Home() {
 				<Search type="dispositivos" />
 				{
 					dispositivosQuery.data?.map((dispositivo: Dispositivo, i: number) => (
-						<div key={i} className="bg-base-100 border-base-300 rounded-box w-full border py-4 px-4.5">
+						<div key={i} className="bg-base-100 border-base-300 rounded-sm w-full block border py-4 px-4.5">
 							<div className="flex justify-between">
 								<span className="font-bold">{dispositivo.name}</span>
 							</div>
-							<div className="border-b border-base-200 pb-4 ">
+							<div className="pb-4">
 								<p className="text-sm! my-2 text-gray-600 dark:text-gray-500">{dispositivo.descripcion}</p>
 								<div className="mt-1 flex items-center gap-3">
 									{displayState(dispositivo.state)}
@@ -68,8 +68,8 @@ export default function Home() {
 								</div>
 							</div>
 							<div className="w-full flex gap-x-3">
-								<Link to={"/dispositivo/" + dispositivo.id} className="btn btn-sm btn-soft btn-primary w-6/12">Vistar</Link>
-								<button className="btn btn-sm btn-soft w-6/12">Configurar</button>
+								<Link to={"/dispositivo/" + dispositivo.id} className="btn btn-sm btn-soft btn-primary flex-1">Vistar</Link>
+								<button className="btn btn-sm btn-soft flex-1">Configurar</button>
 							</div>
 						</div>
 					))

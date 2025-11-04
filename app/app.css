@@ -38,6 +38,7 @@ h2 {
   @apply badge badge-soft badge-primary;
 }
 
+
 .pill-success {
   @apply text-emerald-600 bg-emerald-50;
 }
