@@ -27,6 +27,7 @@ import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { toast, Toaster } from "sonner";
+import Loading from "./components/Loading";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -117,12 +118,8 @@ function AppContent({ children }: { children: React.ReactNode }) {
 	});
 
 
-	if (isNavigating) return <div className="text-center py-20">
-			<span className="loading loading-ring loading-xl"></span>
-		</div>;
-	if (userQuery.isLoading) return <div className="text-center py-20">
-			<span className="loading loading-ring loading-xl"></span>
-		</div>;
+	if (isNavigating) return <Loading />;
+	if (userQuery.isLoading) return <Loading />;
 	if (userQuery.isError && location.pathname !== '/registrarse') {
 		return (
 			<div className="h-screen w-full flex items-center justify-center">

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import api from "~/api";
 import { Link } from "react-router";
 import Search from "~/components/Search";
+import type { Dispositivo } from "~/types/dispositivo";
 
 export function meta({ }: Route.MetaArgs) {
 	return [
@@ -17,7 +18,7 @@ export function meta({ }: Route.MetaArgs) {
 
 
 export default function Home() {
-	const dispositivosQuery = useQuery({
+	const dispositivosQuery = useQuery<Dispositivo[]>({
 		queryKey: ['get_dispositivos'],
 		queryFn: async () => {
 			const response = await api.get("/dispositivos");
@@ -54,10 +55,10 @@ export default function Home() {
 				</div>
 				<Search type="dispositivos" />
 				{
-					dispositivosQuery.data.map((dispositivo: any, i: number) => (
+					dispositivosQuery.data?.map((dispositivo: any, i: number) => (
 						<div key={i} className="bg-base-100 border-base-300 rounded-box w-full border py-4 px-4.5">
 							<div className="flex justify-between">
-								<span className="font-bold">{dispositivo.name}</span>
+								<Link to={"/dispositivo/" + dispositivo.id} className="font-bold">{dispositivo.name}</Link>
 								{displayState(dispositivo.state)}
 							</div>
 							<div>
