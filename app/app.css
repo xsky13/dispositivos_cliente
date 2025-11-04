@@ -26,6 +26,26 @@ h2 {
   @apply text-3xl font-bold;
 }
 
+.pill {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium;
+}
+
+.pill-danger {
+  @apply badge badge-soft badge-error;
+}
+
+.pill-info {
+  @apply badge badge-soft badge-primary;
+}
+
+.pill-success {
+  @apply text-emerald-600 bg-emerald-50;
+}
+
+.pill-disabled {
+  @apply text-gray-600 bg-gray-50;
+}
+
 pre.whitespace-pre-wrap::before {
  display: none !important;
 }

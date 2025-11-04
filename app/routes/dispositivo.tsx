@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 import Loading from "~/components/Loading";
 import QueryErrorBlock from "~/components/QueryErrorBlock";
 import type { Dispositivo } from "~/types/dispositivo";
-import { displayState } from "~/utils";
+import { displayState, displayTextState } from "~/utils";
 
 import {
     Chart as ChartJS,
@@ -163,14 +163,14 @@ export default function Dispositivo() {
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
                                         </svg>
-                                        <span>Tipo: <span className="font-bold">{dispositivoQuery.data?.type}</span></span>
+                                        <span>Tipo: {dispositivoQuery.data?.type}</span>
                                     </div>
                                     <div className={"my-2 flex items-center gap-x-2 " + (dispositivoQuery.data?.state == "alert" && " text-red-700")}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
                                         </svg>
 
-                                        <span>Estado: <span className="font-bold">{displayState(dispositivoQuery.data?.state)}</span></span>
+                                        <span>Estado: {dispositivoQuery.data?.state == "alert" ? dispositivoQuery.data?.state.toUpperCase() : dispositivoQuery.data?.state}</span>
                                     </div>
                                 </div>
                             </div>
