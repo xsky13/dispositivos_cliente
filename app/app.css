@@ -15,7 +15,7 @@ input.input {
 }
 
 .container {
-  @apply md:w-8/12 lg:w-10/12 w-11/12 block m-auto mt-5;
+  @apply md:w-8/12 lg:w-10/12 w-11/12 block m-auto pt-24;
 }
 
 h1 {

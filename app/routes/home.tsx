@@ -45,7 +45,7 @@ export default function Home() {
 		</div>
 	}
 	return (
-		<div className="container-width block m-auto py-10">
+		<div className="container">
 			<div className="flex flex-col gap-y-3">
 				<div role="tablist" className="tabs tabs-border">
 					<a role="tab" className="tab tab-active">Dispositivos</a>
@@ -57,10 +57,10 @@ export default function Home() {
 						<div key={i} className="bg-base-100 border-base-300 rounded-box w-full border py-4 px-4.5">
 							<div className="flex justify-between">
 								<Link to={"/dispositivo/" + dispositivo.id} className="font-bold">{dispositivo.name}</Link>
-								{displayState(dispositivo.state)}
 							</div>
 							<div>
-								<p className="text-sm">{dispositivo.descripcion} • {dispositivo.type}</p>
+								<p className="text-sm! font-medium text-gray-600 dark:text-gray-500">{dispositivo.descripcion} • 
+								{displayState(dispositivo.state)}</p>
 							</div>
 						</div>
 					))

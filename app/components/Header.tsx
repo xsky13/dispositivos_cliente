@@ -10,7 +10,7 @@ export default function Header() {
         window.location.reload();
     }
     return (
-        <div className="bg-base-100 shadow">
+        <div className="bg-base-100 shadow fixed w-full z-50">
             <div className="navbar container-width block m-auto">
                 <div className="flex items-center">
                     <div className="flex-1">
