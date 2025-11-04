@@ -5,18 +5,17 @@ import { AuthContext } from "~/context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import api from "~/api";
 import { Link } from "react-router";
-import Search from "~/components/Search";
 
 export function meta({ }: Route.MetaArgs) {
 	return [
-		{ title: "TwinGrid" },
+		{ title: "Sucursales | TwinGrid" },
 		{ name: "description", content: "TwinGrid: gestion de dispositivos IoT" },
 	];
 }
 
 
 
-export default function Home() {
+export default function Sucursales() {
 	const dispositivosQuery = useQuery({
 		queryKey: ['get_dispositivos'],
 		queryFn: async () => {
@@ -49,10 +48,9 @@ export default function Home() {
 		<div className="md:w-8/12 lg:w-10/12 w-11/12 block m-auto py-10">
 			<div className="flex flex-col gap-y-3">
 				<div role="tablist" className="tabs tabs-border">
-					<a role="tab" className="tab tab-active">Dispositivos</a>
-					<Link to="/sucursales" role="tab" className="tab">Sucursales</Link>
+					<Link to="/" role="tab" className="tab">Dispositivos</Link>
+					<a role="tab" className="tab tab-active">Sucursales</a>
 				</div>
-				<Search type="dispositivos" />
 				{
 					dispositivosQuery.data.map((dispositivo: any, i: number) => (
 						<div key={i} className="bg-base-100 border-base-300 rounded-box w-full border py-4 px-4.5">

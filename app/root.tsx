@@ -117,8 +117,12 @@ function AppContent({ children }: { children: React.ReactNode }) {
 	});
 
 
-	if (isNavigating) return "Loading";
-	if (userQuery.isLoading) return "Loading";
+	if (isNavigating) return <div className="text-center py-20">
+			<span className="loading loading-ring loading-xl"></span>
+		</div>;
+	if (userQuery.isLoading) return <div className="text-center py-20">
+			<span className="loading loading-ring loading-xl"></span>
+		</div>;
 	if (userQuery.isError && location.pathname !== '/registrarse') {
 		return (
 			<div className="h-screen w-full flex items-center justify-center">
