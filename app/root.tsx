@@ -5,19 +5,24 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLocation,
+	useNavigation,
 } from "react-router";
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
+	useQuery,
+	useMutation,
+	useQueryClient,
+	QueryClient,
+	QueryClientProvider,
 } from '@tanstack/react-query'
 
 import type { Route } from "./+types/root";
 import "./app.css";
 import type { User } from "./types/user";
 import api from "./api";
+import { AuthContext } from "./context/AuthContext";
+import Login from "./components/Auth/Login";
+import Header from "./components/Header";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,36 +39,70 @@ export const links: Route.LinksFunction = () => [
 
 const queryClient = new QueryClient()
 
-
 export function Layout({ children }: { children: React.ReactNode }) {
-	// const userQuery = useQuery<User>({
-	// 	queryKey: ['user'],
-	// 	queryFn: async () => {
-	// 		const response = await api.get('/usuarios/authenticaded', { withCredentials: true });
-	// 		return response.data;
-	// 	},
-	// 	retry: 0
-	// });
 	return (
-		<html lang="en">
+		<html lang="en" style={{ height: '100%' }}>
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<Meta />
 				<Links />
 			</head>
-			<body>
-				{children}
-				<ScrollRestoration />
-				<Scripts />
+			<body style={{ height: '100%' }}>
+				<QueryClientProvider client={queryClient}>
+					<AppContent>{children}</AppContent>
+					{/* <Toaster /> */}
+					<ScrollRestoration />
+					<Scripts />
+				</QueryClientProvider>
 			</body>
 		</html>
 	);
 }
 
-export default function App() {
-	return <QueryClientProvider client={queryClient}><Outlet /></QueryClientProvider>;
+
+function AppContent({ children }: { children: React.ReactNode }) {
+	const navigation = useNavigation();
+	const isNavigating = Boolean(navigation.location);
+
+
+	const location = useLocation();
+	const userQuery = useQuery<User>({
+		queryKey: ['user'],
+		queryFn: async () => {
+			const response = await api.get('/usuarios/authenticated');
+			return response.data;
+		},
+		retry: 0
+	});
+
+
+	if (isNavigating) return "Loading";
+	if (userQuery.isLoading) return "Loading";
+	if (userQuery.isError && location.pathname !== '/registrarse') {
+		return (
+			<div className="h-screen w-full flex items-center justify-center">
+				{/* {isNavigating && <div className="pt-40">loading...</div>} */}
+				<div className="bg-base-200 border-base-300 rounded-box w-96 border py-4 px-4.5">
+					<Login />
+				</div>
+			</div>
+		)
+	};
+
+	return (
+		<AuthContext value={userQuery.data}>
+			<Header />
+			{children}
+		</AuthContext>
+	);
 }
+
+
+export default function App() {
+	return <Outlet />;
+}
+
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 	let message = "Oops!";

@@ -1,5 +1,7 @@
 import Login from "~/components/Auth/Login";
 import type { Route } from "./+types/home";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "~/context/AuthContext";
 
 export function meta({ }: Route.MetaArgs) {
 	return [
@@ -9,11 +11,15 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Home() {
+	const user = useContext(AuthContext);
+
+	useEffect(() => {
+		console.log(user);
+		
+	}, [])
 	return (
-		<div className="h-screen flex justify-center items-center w-full">
-			<div className="bg-base-200 border-base-300 rounded-box w-96 border py-4 px-4.5">
-				<Login />
-			</div>
+		<div>
+			<h1>{user?.nombre}</h1>
 		</div>
 	);
 }
