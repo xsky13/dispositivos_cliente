@@ -6,6 +6,7 @@ import {
 	Scripts,
 	ScrollRestoration,
 	useLocation,
+	useNavigate,
 	useNavigation,
 } from "react-router";
 import {
@@ -45,7 +46,8 @@ export type Alert = {
 	message: string,
 	timestamp: string,
 	nivel: string,
-	usuarios: number[]
+	usuarios: number[],
+	alertaId?: number
 }
 
 const queryClient = new QueryClient()
@@ -74,8 +76,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 function AppContent({ children }: { children: React.ReactNode }) {
 	const navigation = useNavigation();
+	const navigate = useNavigate();
 	const isNavigating = Boolean(navigation.location);
-	const [alerts, setAlerts] = useState<Alert[]>([]);
 
 	useEffect(() => {
 		const token = localStorage.getItem('token');
@@ -93,7 +95,11 @@ function AppContent({ children }: { children: React.ReactNode }) {
 
 		socket.on('alert', (alert: Alert) => {
 			toast.error(`Alerta nivel ${alert.nivel} en dispositivo ${alert.deviceId}`, {
-				description: alert.message
+				description: alert.message,
+				action: {
+					label: 'Resolver',
+					onClick: () => { navigate(`/alertas/${alert.alertaId}`) }
+				}
 			})
 		});
 
