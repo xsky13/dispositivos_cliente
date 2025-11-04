@@ -26,6 +26,9 @@ h2 {
   @apply text-3xl font-bold;
 }
 
+pre.whitespace-pre-wrap::before {
+ display: none !important;
+}
 html,
 body {
   @apply bg-white dark:bg-gray-950;

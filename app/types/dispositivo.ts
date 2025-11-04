@@ -5,4 +5,5 @@ export type Dispositivo = {
     state: string,
     type: string,
     schemaJson: Record<string, any>;
+    sucursal: string;
 }

@@ -55,14 +55,14 @@ const queryClient = new QueryClient()
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" style={{ height: '100%' }}>
+		<html lang="en" style={{ height: '100%' }} >
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<Meta />
 				<Links />
 			</head>
-			<body style={{ height: '100%' }}>
+			<body style={{ height: '100%' }} className="dark:bg-base-300!">
 				<QueryClientProvider client={queryClient}>
 					<AppContent>{children}</AppContent>
 					{/* <Toaster /> */}
