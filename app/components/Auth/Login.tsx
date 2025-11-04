@@ -7,7 +7,7 @@ interface LoginCredentials {
     password: string;
 }
 
-interface LoginResponse { token: string };
+interface LoginResponse { data: {token: string} };
 
 export default function Login() {
     const [email, setEmail] = useState<string>("");
@@ -22,8 +22,9 @@ export default function Login() {
                 data: credentials,
             });
         },
-        onSuccess: data => {
-            localStorage.setItem('token', data.token);
+        onSuccess: response => {
+            console.log(response.data.token);
+            localStorage.setItem('token', response.data.token);
             window.location.reload();
             setError("");
         },
@@ -51,7 +52,7 @@ export default function Login() {
                 <h1 className="text-3xl font-bold">Login</h1>
                 <div>
                     <label className="label">Email</label>
-                    <input value={email} onChange={e => setEmail(e.target.value)} type="email" className="input mt-1" placeholder="Su correo electronica" />
+                    <input value={email} onChange={e => setEmail(e.target.value)} type="email" className="input mt-1" placeholder="Su correo electronico" />
                 </div>
 
                 <div>
@@ -65,7 +66,7 @@ export default function Login() {
                     {
                         mutation.isPending ?
                             <span className="loading loading-spinner loading-md"></span>
-                            : 'Loading'
+                            : 'Login'
                     }
                 </button>
             </fieldset>

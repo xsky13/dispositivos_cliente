@@ -16,6 +16,8 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import type { User } from "./types/user";
+import api from "./api";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,6 +36,14 @@ const queryClient = new QueryClient()
 
 
 export function Layout({ children }: { children: React.ReactNode }) {
+	// const userQuery = useQuery<User>({
+	// 	queryKey: ['user'],
+	// 	queryFn: async () => {
+	// 		const response = await api.get('/usuarios/authenticaded', { withCredentials: true });
+	// 		return response.data;
+	// 	},
+	// 	retry: 0
+	// });
 	return (
 		<html lang="en">
 			<head>
