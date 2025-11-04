@@ -17,6 +17,7 @@ export default function Header() {
             <div className="">
                 <ul className="menu menu-horizontal px-1 flex items-center gap-x-5">
                     <li><Link to="/cuenta" className="font-medium">{user?.nombre}</Link></li>
+                    <li><Link to="/notificaciones" className="font-medium">Notificaciones</Link></li>
                     <li>
                         <button onClick={logout} className="btn">Salir</button>
                     </li>
