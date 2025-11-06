@@ -44,7 +44,7 @@ h2 {
 }
 
 .pill-disabled {
-  @apply text-gray-600 bg-gray-50;
+  @apply text-gray-600 bg-gray-50 dark:text-gray-500 dark:bg-base-200;
 }
 
 pre.whitespace-pre-wrap::before {
