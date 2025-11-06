@@ -79,6 +79,17 @@ function AppContent({ children }: { children: React.ReactNode }) {
 	const navigation = useNavigation();
 	const navigate = useNavigate();
 	const isNavigating = Boolean(navigation.location);
+	const queryClient = useQueryClient()
+
+	const location = useLocation();
+	const userQuery = useQuery<User>({
+		queryKey: ['user'],
+		queryFn: async () => {
+			const response = await api.get('/usuarios/authenticated');
+			return response.data;
+		},
+		retry: 0
+	});
 
 	useEffect(() => {
 		const token = localStorage.getItem('token');
@@ -101,21 +112,12 @@ function AppContent({ children }: { children: React.ReactNode }) {
 					label: 'Resolver',
 					onClick: () => { navigate(`/alertas/${alert.alertaId}`) }
 				}
-			})
+			});
+			queryClient.invalidateQueries({ queryKey: ['user'] })
 		});
 
 		return () => { socket.disconnect() };
 	}, []);
-
-	const location = useLocation();
-	const userQuery = useQuery<User>({
-		queryKey: ['user'],
-		queryFn: async () => {
-			const response = await api.get('/usuarios/authenticated');
-			return response.data;
-		},
-		retry: 0
-	});
 
 
 	if (isNavigating) return <Loading />;
