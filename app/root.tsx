@@ -107,13 +107,12 @@ function AppContent({ children }: { children: React.ReactNode }) {
 
 		socket.on('alert', (alert: Alert) => {
 			toast.error(`Alerta nivel ${alert.nivel} en dispositivo ${alert.deviceId}`, {
-				description: alert.message,
 				action: {
 					label: 'Resolver',
 					onClick: () => { navigate(`/alertas/${alert.alertaId}`) }
 				}
 			});
-			queryClient.invalidateQueries({ queryKey: ['user'] })
+			queryClient.invalidateQueries({ queryKey: ['notificaciones_usuario'] })
 		});
 
 		return () => { socket.disconnect() };

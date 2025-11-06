@@ -15,6 +15,7 @@
     "axios": "^1.13.1",
     "chart.js": "^4.5.1",
     "faker": "^6.6.6",
+    "framer-motion": "^12.23.24",
     "isbot": "^5.1.31",
     "lucide-react": "^0.552.0",
     "react": "^19.1.1",
