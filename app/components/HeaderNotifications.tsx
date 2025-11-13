@@ -46,7 +46,7 @@ export default function HeaderNotifications({ notificaciones }: { notificaciones
                         transition={{ duration: 0.15 }}
                         className="absolute right-0 top-full mt-2 w-92 max-h-96 overflow-y-auto rounded-md 
                                    border border-gray-200 dark:border-none bg-white dark:bg-base-200 
-                                   shadow-md z-50"
+                                   shadow-md z-50 p-2"
                     >
                         {updNotificaciones.length === 0 ? (
                             <div className="p-3 text-center text-sm text-gray-500">

@@ -20,6 +20,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState, type JSX } from "react";
+import Resoluciones from "~/components/Resolucion/Resoluciones";
 
 ChartJS.register(
     CategoryScale,
@@ -37,6 +38,13 @@ type Graph = {
         time: string,
         value: string
     }[]
+}
+
+export function meta({ }: Route.MetaArgs) {
+    return [
+        { title: "TwinGrid | Dispositivo" },
+        { name: "description", content: "TwinGrid: gestion de dispositivos IoT" },
+    ];
 }
 
 
@@ -98,6 +106,7 @@ export default function Dispositivo() {
         },
         retry: 0
     });
+    
 
 
     if (dispositivoQuery.isLoading) return <Loading />;
@@ -138,6 +147,7 @@ export default function Dispositivo() {
 
     return (
         <div className="container">
+            <Resoluciones dispositivo={dispositivoQuery.data!} />
             {
                 hayGrafos ?
                     <div className="flex gap-10 items-start flex-wrap md:flex-nowrap">
